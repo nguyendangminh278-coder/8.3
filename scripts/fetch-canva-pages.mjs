@@ -14,10 +14,10 @@ if (!Array.isArray(source.pages) || source.pages.length !== 14) {
 
 await fs.mkdir(OUT, { recursive: true });
 
-async function fetchImage(url, label) {
+async function fetchImage(url, label, timeoutMs = 10_000) {
   const response = await fetch(url, {
     redirect: 'follow',
-    signal: AbortSignal.timeout(15_000),
+    signal: AbortSignal.timeout(timeoutMs),
     headers: {
       'user-agent': 'Mozilla/5.0 AppleWebKit/537.36 Chrome/131 Safari/537.36',
       'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
@@ -33,16 +33,45 @@ async function fetchImage(url, label) {
   return Buffer.from(await response.arrayBuffer());
 }
 
+function makeHiResMediaUrl(primary) {
+  return primary
+    .replace('/height:596/', '/height:1600/')
+    .replace('/width:335?', '/width:900?');
+}
+
+let hiResMediaAvailable = null;
+
 async function fetchCanvaPreview(entry, number) {
   const primary = entry.url;
   const fallback = new URL(primary).searchParams.get('fallback');
-  const candidates = [fallback, primary].filter(Boolean);
+  const hiRes = makeHiResMediaUrl(primary);
   const errors = [];
 
-  for (const [index, url] of candidates.entries()) {
+  if (hiResMediaAvailable !== false) {
     try {
-      console.log(`  trying ${index === 0 && fallback ? 'Canva export fallback' : 'Canva media'}...`);
-      return await fetchImage(url, `Page ${number}`);
+      console.log('  trying 900x1600 Canva media render...');
+      const buffer = await fetchImage(hiRes, `Page ${number} hi-res`, 8_000);
+      const meta = await sharp(buffer).metadata();
+      if ((meta.width ?? 0) >= 800 && (meta.height ?? 0) >= 1400) {
+        hiResMediaAvailable = true;
+        return { buffer, sourceKind: 'canva-media-900x1600' };
+      }
+      throw new Error(`hi-res endpoint returned ${meta.width}x${meta.height}`);
+    } catch (error) {
+      errors.push(error?.message || String(error));
+      console.warn(`  hi-res source unavailable: ${errors.at(-1)}`);
+      if (entry.page === 1) hiResMediaAvailable = false;
+    }
+  }
+
+  for (const [kind, url] of [
+    ['canva-export-fallback', fallback],
+    ['canva-media-thumbnail', primary],
+  ]) {
+    if (!url) continue;
+    try {
+      console.log(`  trying ${kind}...`);
+      return { buffer: await fetchImage(url, `Page ${number}`, 12_000), sourceKind: kind };
     } catch (error) {
       errors.push(error?.message || String(error));
       console.warn(`  source failed: ${errors.at(-1)}`);
@@ -59,7 +88,7 @@ let previousProbe = null;
 for (const entry of source.pages) {
   const number = String(entry.page).padStart(2, '0');
   console.log(`fetching Canva page ${number}...`);
-  const input = await fetchCanvaPreview(entry, number);
+  const { buffer: input, sourceKind } = await fetchCanvaPreview(entry, number);
   const inputMeta = await sharp(input).metadata();
 
   if ((inputMeta.width ?? 0) < 300 || (inputMeta.height ?? 0) < 500) {
@@ -94,6 +123,7 @@ for (const entry of source.pages) {
   metadata.push({
     page: entry.page,
     pageId: entry.id,
+    sourceKind,
     sourceWidth: inputMeta.width,
     sourceHeight: inputMeta.height,
     sourceFormat: inputMeta.format,
@@ -107,7 +137,7 @@ for (const entry of source.pages) {
   });
 
   console.log(
-    `saved ${target} from ${inputMeta.width}x${inputMeta.height} ${inputMeta.format}; ` +
+    `saved ${target} from ${sourceKind} ${inputMeta.width}x${inputMeta.height} ${inputMeta.format}; ` +
     `entropy=${outputStats.entropy.toFixed(3)} diff=${meanAbsDiffFromPrevious ?? 'n/a'}`
   );
 }
@@ -128,6 +158,7 @@ await fs.writeFile(
     designId: source.designId,
     canvaVersion: source.generatedFromCanvaVersion,
     capturedAt: new Date().toISOString(),
+    hiResMediaAvailable,
     pages: metadata,
   }, null, 2)}\n`,
   'utf8'
