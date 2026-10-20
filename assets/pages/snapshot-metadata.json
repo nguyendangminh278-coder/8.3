@@ -1,189 +1,260 @@
 {
-  "source": "https://www.canva.com/design/DAHYdLjF2Pw/view?embed",
-  "capturedAt": "2026-10-20T20:43:50.087Z",
-  "pageTextSample": "We’ll have you designing again soon\n\nIf you can’t get past this page, visit the Help Centre to see why this is happening.\n\nRayID: a4dada870ae70dac",
+  "source": "Canva page thumbnails via connected Canva design",
+  "designId": "DAHYdLjF2Pw",
+  "canvaVersion": 82,
+  "capturedAt": "2026-10-20T20:48:06.735Z",
   "pages": [
     {
       "page": 1,
-      "bytes": 55468,
-      "sha256": "5b4697b18f4bddcd2fe35ab6be098ca13636a28ed5133439a383549f49ce87d4",
-      "entropy": 1.9152,
-      "sharpness": 2.3458,
+      "pageId": "PB1ZMt04MnhDVstj",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 57541,
+      "outputBytes": 112872,
+      "sha256": "6d89de53f4d84871aa22ab1a20c942116404ce69d5c35cfd99531110f48852e0",
+      "entropy": 4.9378,
+      "sharpness": 0.7948,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
       "meanAbsDiffFromPrevious": null
     },
     {
       "page": 2,
-      "bytes": 55428,
-      "sha256": "6613b60bd4263e43111f879f3287ab1adc2baeb8017772be2a8a8aaee7877bd4",
-      "entropy": 1.9147,
-      "sharpness": 2.3453,
+      "pageId": "PB8KNlpgcxJrvLYM",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 99273,
+      "outputBytes": 298290,
+      "sha256": "0e05b1e9e7d5e92a52e40800b0178510ecfad77edfb95d3a6f61e05bc9992071",
+      "entropy": 6.7241,
+      "sharpness": 1.3366,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.035
+      "meanAbsDiffFromPrevious": 64.429
     },
     {
       "page": 3,
-      "bytes": 55318,
-      "sha256": "15641772b1c40c586ef945079236c4f414b6d4242c935261418ec2ac0e63da35",
-      "entropy": 1.9147,
-      "sharpness": 2.3451,
+      "pageId": "PByKJysHmqP8GKGm",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 60907,
+      "outputBytes": 166606,
+      "sha256": "68c69a83512d7f8bc671d4caae4da9447c9ece4624cefcd545c710ce5621c5b2",
+      "entropy": 5.8213,
+      "sharpness": 1.2297,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.016
+      "meanAbsDiffFromPrevious": 63.894
     },
     {
       "page": 4,
-      "bytes": 55392,
-      "sha256": "71b78749b1820e8c1da261cbf9e12d9922ffb53e620f45d7b8f4020d665aa5db",
-      "entropy": 1.9155,
-      "sharpness": 2.3454,
+      "pageId": "PBdDPlTB6RwY8VSz",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 96891,
+      "outputBytes": 199698,
+      "sha256": "adeb161be3ca031b7d3b44aec64436dc6fe9af4bdb9c34af036d62ec476e863c",
+      "entropy": 5.7979,
+      "sharpness": 1.1344,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.019
+      "meanAbsDiffFromPrevious": 42.86
     },
     {
       "page": 5,
-      "bytes": 55372,
-      "sha256": "88473fd18203a08ebd16d8ad1ca6939638041334d6d176cf65397bba121abf14",
-      "entropy": 1.9144,
-      "sharpness": 2.3457,
+      "pageId": "PBC4CBp8brmcwbqY",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 101331,
+      "outputBytes": 214904,
+      "sha256": "ea55b7f683f232b31172b0b562e0bee4f225810a80368c599326cf92eeda32b8",
+      "entropy": 5.7268,
+      "sharpness": 1.1279,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.026
+      "meanAbsDiffFromPrevious": 46.907
     },
     {
       "page": 6,
-      "bytes": 55466,
-      "sha256": "b4eb40ecf84a18ade8e12f5dc53274a886f6463ee40e15045ca43d901eae131b",
-      "entropy": 1.9146,
-      "sharpness": 2.3459,
+      "pageId": "PBhCm5ZBRX9BJLxC",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 71463,
+      "outputBytes": 166696,
+      "sha256": "fcbef3824c6517c702339ab2fbcfe2150140ce419731fd1d1354a722dadd2ca6",
+      "entropy": 6.4403,
+      "sharpness": 1.1041,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.025
+      "meanAbsDiffFromPrevious": 76.833
     },
     {
       "page": 7,
-      "bytes": 55400,
-      "sha256": "3f7be6b28b38b996fe495cba56af2a4608be6d7bda17e76164cc729bba6641fa",
-      "entropy": 1.9154,
-      "sharpness": 2.3454,
+      "pageId": "PBvPFDcVb3JwyrKt",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 73173,
+      "outputBytes": 167896,
+      "sha256": "6c1948df93ccd895ca1063967570f95966cddf7437b8cb2ad33a86aa4ab454e5",
+      "entropy": 6.2389,
+      "sharpness": 0.9892,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.039
+      "meanAbsDiffFromPrevious": 32.86
     },
     {
       "page": 8,
-      "bytes": 55414,
-      "sha256": "364064c1a731f9a06aeb656db1ce682fd10436eb0d2bec5b818bab08b3793864",
-      "entropy": 1.915,
-      "sharpness": 2.3453,
+      "pageId": "PBZTJXrLCCgMkvYQ",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 73224,
+      "outputBytes": 188886,
+      "sha256": "2bfc11dd0c5acdcf273fed417a228ce076bf12b7964799fed0a3ff4c6d471db2",
+      "entropy": 6.3627,
+      "sharpness": 1.1361,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.015
+      "meanAbsDiffFromPrevious": 52.275
     },
     {
       "page": 9,
-      "bytes": 55394,
-      "sha256": "5f615686aa48237ab3e1237964bfc677cdaa5d0ac6eaad7453ac3a5d073c248d",
-      "entropy": 1.9144,
-      "sharpness": 2.3458,
+      "pageId": "PBT96kHGqgZF34lk",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 81318,
+      "outputBytes": 210962,
+      "sha256": "797251e449963f2e4f48f7fc637d7c77be12a9ac2d20c72bf83a430761b80ab9",
+      "entropy": 6.2862,
+      "sharpness": 1.2408,
       "dominant": {
-        "r": 248,
+        "r": 232,
         "g": 248,
         "b": 248
       },
-      "meanAbsDiffFromPrevious": 0.033
+      "meanAbsDiffFromPrevious": 73.362
     },
     {
       "page": 10,
-      "bytes": 55352,
-      "sha256": "52e8862a4df67a9b307b444cd2a29594228c0449b1f93cb8be16ac098b1fdd73",
-      "entropy": 1.9151,
-      "sharpness": 2.3456,
+      "pageId": "PBZfTPLwlSmzFSsH",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 81649,
+      "outputBytes": 214974,
+      "sha256": "8459b885188f3e24f9c3e8c600095c399f9b833673a9b0453d2925e97e0c34a1",
+      "entropy": 6.6045,
+      "sharpness": 1.0401,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.027
+      "meanAbsDiffFromPrevious": 81.06
     },
     {
       "page": 11,
-      "bytes": 55308,
-      "sha256": "efe799daf21344e97903fcb4057ff8ed1ea997e65675457fa70b23e17378c464",
-      "entropy": 1.9155,
-      "sharpness": 2.3452,
+      "pageId": "PBxwWrMpMkDSs7NF",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 68478,
+      "outputBytes": 168288,
+      "sha256": "4065f37d9fb5476e5716e70bcce64e1286aabcfc7a707db628a0f613769f77fd",
+      "entropy": 5.8047,
+      "sharpness": 1.0731,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.023
+      "meanAbsDiffFromPrevious": 30.975
     },
     {
       "page": 12,
-      "bytes": 55392,
-      "sha256": "f3315d2ed4b74b6fc96ac673d715147379940f99d7a65e3d3ae3dc7aebcee5ca",
-      "entropy": 1.9144,
-      "sharpness": 2.346,
+      "pageId": "PB15Dl3bkrkwQnDT",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 72620,
+      "outputBytes": 186790,
+      "sha256": "1712e6d0d2b275185edbfdf3df31a5ee0c974801b668269a5bbb688f883dcd62",
+      "entropy": 5.9459,
+      "sharpness": 1.0946,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.036
+      "meanAbsDiffFromPrevious": 23.642
     },
     {
       "page": 13,
-      "bytes": 55286,
-      "sha256": "bb9b30dd0edd9eee1db739882e0e2b24dcac5631e9f1a33f22503f686ef34b0b",
-      "entropy": 1.9153,
-      "sharpness": 2.3456,
+      "pageId": "PBnj6PFJhg7fjhQN",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 73068,
+      "outputBytes": 212700,
+      "sha256": "be0ef629ac8969c92333ad9f544f6599231ab7bcc7da5a33092906012111e7a7",
+      "entropy": 6.4585,
+      "sharpness": 1.0415,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.028
+      "meanAbsDiffFromPrevious": 31.305
     },
     {
       "page": 14,
-      "bytes": 55334,
-      "sha256": "d9b1d4fa58543d514846bc42f4da6be7ba44ae4434115bf3eefc12e948771366",
-      "entropy": 1.9153,
-      "sharpness": 2.3454,
+      "pageId": "PBlDhgXnY2PmKSy5",
+      "sourceWidth": 335,
+      "sourceHeight": 596,
+      "sourceFormat": "png",
+      "sourceBytes": 71395,
+      "outputBytes": 226758,
+      "sha256": "cddbf8d6682fcbeb631bd71b65c1fac27ef4779826b09dcde8eeea60c9edc6b6",
+      "entropy": 5.8601,
+      "sharpness": 1.2748,
       "dominant": {
-        "r": 248,
-        "g": 248,
-        "b": 248
+        "r": 24,
+        "g": 24,
+        "b": 8
       },
-      "meanAbsDiffFromPrevious": 0.024
+      "meanAbsDiffFromPrevious": 68.569
     }
   ]
 }
