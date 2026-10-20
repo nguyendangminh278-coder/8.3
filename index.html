@@ -8,37 +8,20 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
   <title>University Wrapped 20/10</title>
-  <meta name="description" content="University Wrapped 20/10 — exact Canva playback with original animation and music." />
+  <meta name="description" content="University Wrapped 20/10" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <main class="player" id="player" aria-label="University Wrapped 20/10">
-    <div class="canva-host" id="canvaHost"></div>
-
-    <section class="start-screen" id="startScreen">
-      <div class="start-screen__inner">
-        <div class="start-screen__eyebrow">WRAPPED 20/10</div>
-        <button class="start-button" id="startButton" type="button">
-          <span class="start-button__icon" aria-hidden="true">▶</span>
-          <span>CHẠM ĐỂ BẮT ĐẦU</span>
-        </button>
-        <p class="start-screen__note">Bật âm lượng để nghe nhạc gốc</p>
-      </div>
-    </section>
-
-    <div class="loading" id="loading" hidden aria-live="polite">
-      <span class="loading__spinner" aria-hidden="true"></span>
-      <span>Đang tải bản Canva gốc…</span>
+  <main class="page-shell" aria-label="University Wrapped 20/10">
+    <div class="canva-frame">
+      <iframe
+        title="WRAPPED 20/10"
+        loading="eager"
+        src="https://www.canva.com/design/DAHYdLjF2Pw/wDqJfFARVEA69KBaaCsbIQ/watch?embed"
+        allow="autoplay; fullscreen"
+        allowfullscreen="allowfullscreen">
+      </iframe>
     </div>
-
-    <a class="fallback-link" id="fallbackLink"
-       href="https://canva.link/018np8lvts0sdwp"
-       target="_blank" rel="noopener noreferrer" hidden>
-      Mở bản gốc trên Canva
-    </a>
   </main>
-
-  <noscript>Trang này cần JavaScript để phát thiết kế và âm thanh.</noscript>
-  <script src="./app.js" defer></script>
 </body>
 </html>
