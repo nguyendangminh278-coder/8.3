@@ -6,8 +6,6 @@ on:
       - '.github/workflows/validate.yml'
       - 'index.html'
       - 'styles.css'
-      - 'app.js'
-      - 'effects.js'
   workflow_dispatch:
 
 jobs:
@@ -16,14 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Check JavaScript syntax
+      - name: Validate exact Canva watch embed
         run: |
-          node --check app.js
-          node --check effects.js
+          grep -q 'https://www.canva.com/design/DAHYdLjF2Pw/wDqJfFARVEA69KBaaCsbIQ/watch?embed' index.html
+          grep -q 'aspect-ratio: 9 / 16' styles.css
 
       - name: Smoke test static server
         run: |
@@ -32,5 +26,3 @@ jobs:
           trap 'kill $SERVER_PID' EXIT
           sleep 1
           curl --fail --silent http://127.0.0.1:8080/ | grep -q 'University Wrapped 20/10'
-          curl --fail --silent --head http://127.0.0.1:8080/assets/pages/01.webp >/dev/null
-          curl --fail --silent --head http://127.0.0.1:8080/effects.js >/dev/null
