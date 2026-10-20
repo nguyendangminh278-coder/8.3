@@ -1,7 +1,7 @@
 :root {
   color-scheme: dark;
-  --bg: #09090b;
-  --card: #111216;
+  --bg: #08080a;
+  --card: #101116;
   --text: #f7f7f8;
   --muted: rgba(255,255,255,.66);
   --line: rgba(255,255,255,.18);
@@ -19,6 +19,7 @@ body {
   overscroll-behavior: none;
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 button, a { font: inherit; }
 
@@ -34,7 +35,7 @@ button, a { font: inherit; }
 
 .story-backdrop {
   position: absolute;
-  inset: -8%;
+  inset: -10%;
   background:
     radial-gradient(circle at 50% 15%, rgba(255,255,255,.08), transparent 34%),
     radial-gradient(circle at 50% 88%, rgba(255,255,255,.05), transparent 36%),
@@ -48,12 +49,14 @@ button, a { font: inherit; }
   inset: 0;
   display: grid;
   place-items: center;
-  perspective: 1400px;
+  perspective: 1500px;
   overflow: hidden;
   z-index: 2;
 }
 
 .story-card {
+  --drag-y: 0px;
+  --drag-scale: 1;
   position: absolute;
   inset: 0;
   display: grid;
@@ -69,7 +72,17 @@ button, a { font: inherit; }
   position: absolute;
   inset: 0;
   pointer-events: none;
-  box-shadow: inset 0 0 60px rgba(0,0,0,.08);
+  box-shadow: inset 0 0 54px rgba(0,0,0,.08);
+  z-index: 4;
+}
+
+.story-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 20%, transparent 75%, rgba(0,0,0,.12));
   z-index: 3;
 }
 
@@ -88,57 +101,210 @@ button, a { font: inherit; }
   user-select: none;
 }
 
+.story-card.is-dragging {
+  transition: none !important;
+  transform: translate3d(0, var(--drag-y), 0) scale(var(--drag-scale));
+}
+.story-card.is-snapping {
+  transition: transform 250ms var(--ease);
+  transform: translate3d(0, var(--drag-y), 0) scale(var(--drag-scale));
+}
+
 .story-card--incoming {
   opacity: 0;
   pointer-events: none;
 }
 
-.story-card.is-loading::after {
-  content: "";
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,.22);
-  border-top-color: rgba(255,255,255,.95);
-  animation: spin .8s linear infinite;
-  z-index: 4;
+.story-card.is-loading::before {
+  box-shadow: inset 0 0 0 999px rgba(7,7,9,.28);
+  backdrop-filter: blur(12px);
 }
-
+.story-card.is-loading::after {
+  opacity: 1;
+  width: 30px;
+  height: 30px;
+  inset: 50% auto auto 50%;
+  margin: -15px 0 0 -15px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.2);
+  border-top-color: rgba(255,255,255,.95);
+  background: transparent;
+  animation: spin .8s linear infinite;
+  z-index: 8;
+}
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.story-card.transition-next-out {
-  animation: nextOut var(--duration) var(--ease) both;
-}
-.story-card.transition-next-in {
-  animation: nextIn var(--duration) var(--ease) both;
-}
-.story-card.transition-prev-out {
-  animation: prevOut var(--duration) var(--ease) both;
-}
+.story-card.transition-next-out,
+.story-card.transition-next-in,
+.story-card.transition-prev-out,
 .story-card.transition-prev-in {
-  animation: prevIn var(--duration) var(--ease) both;
+  animation-duration: var(--duration);
+  animation-timing-function: var(--ease);
+  animation-fill-mode: both;
 }
+.story-card.transition-next-out { animation-name: nextOut; }
+.story-card.transition-next-in { animation-name: nextIn; }
+.story-card.transition-prev-out { animation-name: prevOut; }
+.story-card.transition-prev-in { animation-name: prevIn; }
 
 @keyframes nextOut {
-  0% { opacity: 1; transform: translate3d(0,0,0) scale(1) rotateX(0deg); filter: blur(0); }
-  58% { opacity: .92; transform: translate3d(0,-18%,0) scale(.985) rotateX(1.8deg); filter: blur(.6px); }
-  100% { opacity: 0; transform: translate3d(0,-108%,0) scale(.94) rotateX(5deg); filter: blur(3px); }
+  0% { opacity: 1; transform: translate3d(0,0,0) scale(1); filter: blur(0); }
+  65% { opacity: .94; transform: translate3d(0,-16%,0) scale(.988); filter: blur(.4px); }
+  100% { opacity: 0; transform: translate3d(0,-106%,0) scale(.95); filter: blur(3px); }
 }
 @keyframes nextIn {
-  0% { opacity: 0; transform: translate3d(0,105%,0) scale(.975) rotateX(-4deg); filter: blur(4px); }
-  45% { opacity: 1; filter: blur(.5px); }
-  100% { opacity: 1; transform: translate3d(0,0,0) scale(1) rotateX(0deg); filter: blur(0); }
+  0% { opacity: 0; transform: translate3d(0,106%,0) scale(.972); filter: blur(4px); }
+  48% { opacity: 1; filter: blur(.4px); }
+  100% { opacity: 1; transform: translate3d(0,0,0) scale(1); filter: blur(0); }
 }
 @keyframes prevOut {
-  0% { opacity: 1; transform: translate3d(0,0,0) scale(1) rotateX(0deg); filter: blur(0); }
-  58% { opacity: .92; transform: translate3d(0,18%,0) scale(.985) rotateX(-1.8deg); filter: blur(.6px); }
-  100% { opacity: 0; transform: translate3d(0,108%,0) scale(.94) rotateX(-5deg); filter: blur(3px); }
+  0% { opacity: 1; transform: translate3d(0,0,0) scale(1); filter: blur(0); }
+  65% { opacity: .94; transform: translate3d(0,16%,0) scale(.988); filter: blur(.4px); }
+  100% { opacity: 0; transform: translate3d(0,106%,0) scale(.95); filter: blur(3px); }
 }
 @keyframes prevIn {
-  0% { opacity: 0; transform: translate3d(0,-105%,0) scale(.975) rotateX(4deg); filter: blur(4px); }
-  45% { opacity: 1; filter: blur(.5px); }
-  100% { opacity: 1; transform: translate3d(0,0,0) scale(1) rotateX(0deg); filter: blur(0); }
+  0% { opacity: 0; transform: translate3d(0,-106%,0) scale(.972); filter: blur(4px); }
+  48% { opacity: 1; filter: blur(.4px); }
+  100% { opacity: 1; transform: translate3d(0,0,0) scale(1); filter: blur(0); }
 }
+
+/* Cover: gentle cinematic zoom. */
+.stage[data-transition="cover"] .transition-next-out,
+.stage[data-transition="cover"] .transition-prev-out { animation-name: coverOut; }
+.stage[data-transition="cover"] .transition-next-in,
+.stage[data-transition="cover"] .transition-prev-in { animation-name: coverIn; }
+@keyframes coverOut {
+  from { opacity: 1; transform: scale(1); filter: blur(0); }
+  to { opacity: 0; transform: scale(1.08); filter: blur(4px); }
+}
+@keyframes coverIn {
+  from { opacity: 0; transform: scale(.9); filter: blur(7px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+/* Timeline: a vertical reveal that visually continues the years. */
+.stage[data-transition="timeline"] .transition-next-out { animation-name: timelineOut; }
+.stage[data-transition="timeline"] .transition-next-in { animation-name: timelineIn; }
+.stage[data-transition="timeline"] .transition-prev-out { animation-name: timelinePrevOut; }
+.stage[data-transition="timeline"] .transition-prev-in { animation-name: timelinePrevIn; }
+@keyframes timelineOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: .1; transform: translateY(-28%) scale(1.045); }
+}
+@keyframes timelineIn {
+  0% { opacity: .25; transform: translateY(34%) scale(.94); clip-path: inset(100% 0 0 0 round 24px); }
+  45% { opacity: 1; clip-path: inset(18% 0 0 0 round 10px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); clip-path: inset(0 0 0 0); }
+}
+@keyframes timelinePrevOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: .1; transform: translateY(28%) scale(1.045); }
+}
+@keyframes timelinePrevIn {
+  0% { opacity: .25; transform: translateY(-34%) scale(.94); clip-path: inset(0 0 100% 0 round 24px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); clip-path: inset(0); }
+}
+
+/* Money / big-number page: punch in from centre. */
+.stage[data-transition="zoom"] .transition-next-out,
+.stage[data-transition="zoom"] .transition-prev-out { animation-name: zoomOut; }
+.stage[data-transition="zoom"] .transition-next-in,
+.stage[data-transition="zoom"] .transition-prev-in { animation-name: zoomIn; }
+@keyframes zoomOut { from { opacity:1; transform:scale(1); } to { opacity:0; transform:scale(.82); filter:blur(5px); } }
+@keyframes zoomIn { 0% { opacity:0; transform:scale(1.28); filter:blur(8px); } 58% { opacity:1; transform:scale(.985); filter:blur(0); } 100% { opacity:1; transform:scale(1); } }
+
+/* Ranking: card-like shutter reveal. */
+.stage[data-transition="ranking"] .transition-next-out { animation-name: rankingOut; }
+.stage[data-transition="ranking"] .transition-next-in { animation-name: rankingIn; }
+.stage[data-transition="ranking"] .transition-prev-out { animation-name: rankingPrevOut; }
+.stage[data-transition="ranking"] .transition-prev-in { animation-name: rankingPrevIn; }
+@keyframes rankingOut { from { opacity:1; transform:translateX(0) rotateZ(0); } to { opacity:0; transform:translateX(-22%) rotateZ(-2.5deg) scale(.96); } }
+@keyframes rankingIn { 0% { opacity:0; transform:translateX(30%) rotateZ(3deg) scale(.94); clip-path:inset(0 0 0 100%); } 100% { opacity:1; transform:none; clip-path:inset(0); } }
+@keyframes rankingPrevOut { from { opacity:1; } to { opacity:0; transform:translateX(22%) rotateZ(2.5deg) scale(.96); } }
+@keyframes rankingPrevIn { 0% { opacity:0; transform:translateX(-30%) rotateZ(-3deg) scale(.94); clip-path:inset(0 100% 0 0); } 100% { opacity:1; transform:none; clip-path:inset(0); } }
+
+/* Mood: energetic diagonal wipe. */
+.stage[data-transition="wipe"] .transition-next-out,
+.stage[data-transition="wipe"] .transition-prev-out { animation-name: wipeOut; }
+.stage[data-transition="wipe"] .transition-next-in,
+.stage[data-transition="wipe"] .transition-prev-in { animation-name: wipeIn; }
+@keyframes wipeOut { from { opacity:1; transform:scale(1); } to { opacity:.2; transform:scale(1.035); } }
+@keyframes wipeIn { 0% { opacity:.1; clip-path:polygon(0 100%, 0 100%, 0 100%, 0 100%); transform:scale(1.06); } 100% { opacity:1; clip-path:polygon(-20% -20%, 120% -20%, 120% 120%, -20% 120%); transform:scale(1); } }
+
+/* Paper: notes/teacher pages feel like a sheet turning. */
+.stage[data-transition="paper"] { perspective: 1800px; }
+.stage[data-transition="paper"] .transition-next-out { animation-name: paperOut; transform-origin: left center; }
+.stage[data-transition="paper"] .transition-next-in { animation-name: paperIn; transform-origin: right center; }
+.stage[data-transition="paper"] .transition-prev-out { animation-name: paperPrevOut; transform-origin: right center; }
+.stage[data-transition="paper"] .transition-prev-in { animation-name: paperPrevIn; transform-origin: left center; }
+@keyframes paperOut { from { opacity:1; transform:rotateY(0) translateX(0); } to { opacity:0; transform:rotateY(-12deg) translateX(-28%) scale(.96); filter:brightness(.72); } }
+@keyframes paperIn { from { opacity:0; transform:rotateY(16deg) translateX(30%) scale(.96); filter:brightness(.8); } to { opacity:1; transform:none; filter:none; } }
+@keyframes paperPrevOut { from { opacity:1; } to { opacity:0; transform:rotateY(12deg) translateX(28%) scale(.96); filter:brightness(.72); } }
+@keyframes paperPrevIn { from { opacity:0; transform:rotateY(-16deg) translateX(-30%) scale(.96); filter:brightness(.8); } to { opacity:1; transform:none; filter:none; } }
+
+/* Python: sharp camera flash. */
+.stage[data-transition="flash"] .transition-next-out,
+.stage[data-transition="flash"] .transition-prev-out { animation-name: flashOut; }
+.stage[data-transition="flash"] .transition-next-in,
+.stage[data-transition="flash"] .transition-prev-in { animation-name: flashIn; }
+@keyframes flashOut { 0%{opacity:1;filter:brightness(1)} 48%{opacity:1;filter:brightness(2.1)} 100%{opacity:0;transform:scale(1.05);filter:brightness(1.2)} }
+@keyframes flashIn { 0%{opacity:0;transform:scale(.92);filter:brightness(2.4) blur(3px)} 45%{opacity:1;filter:brightness(1.3)} 100%{opacity:1;transform:scale(1);filter:none} }
+
+/* YOU KNOW?: circular spotlight reveal. */
+.stage[data-transition="spotlight"] .transition-next-out,
+.stage[data-transition="spotlight"] .transition-prev-out { animation-name: spotOut; }
+.stage[data-transition="spotlight"] .transition-next-in,
+.stage[data-transition="spotlight"] .transition-prev-in { animation-name: spotIn; }
+@keyframes spotOut { from { opacity:1; transform:scale(1); } to { opacity:.15; transform:scale(1.08); filter:blur(2px); } }
+@keyframes spotIn { 0% { opacity:.35; transform:scale(1.12); clip-path:circle(0% at 50% 48%); } 65% { opacity:1; } 100% { opacity:1; transform:scale(1); clip-path:circle(80% at 50% 48%); } }
+
+/* Photo pages: soft depth crossfade. */
+.stage[data-transition="photo"] .transition-next-out,
+.stage[data-transition="photo"] .transition-prev-out { animation-name: photoOut; }
+.stage[data-transition="photo"] .transition-next-in,
+.stage[data-transition="photo"] .transition-prev-in { animation-name: photoIn; }
+@keyframes photoOut { from { opacity:1; transform:scale(1); filter:saturate(1); } to { opacity:0; transform:scale(1.1); filter:saturate(.7) blur(4px); } }
+@keyframes photoIn { from { opacity:0; transform:scale(.88); filter:saturate(1.25) blur(5px); } to { opacity:1; transform:scale(1); filter:none; } }
+
+/* Push: quick third-person-style camera push. */
+.stage[data-transition="push"] .transition-next-out { animation-name: pushOut; }
+.stage[data-transition="push"] .transition-next-in { animation-name: pushIn; }
+.stage[data-transition="push"] .transition-prev-out { animation-name: pushPrevOut; }
+.stage[data-transition="push"] .transition-prev-in { animation-name: pushPrevIn; }
+@keyframes pushOut { from { opacity:1; transform:translateZ(0) scale(1); } to { opacity:0; transform:translateY(-12%) scale(1.18); filter:blur(5px); } }
+@keyframes pushIn { from { opacity:0; transform:translateY(20%) scale(.82); filter:blur(7px); } to { opacity:1; transform:none; filter:none; } }
+@keyframes pushPrevOut { from { opacity:1; } to { opacity:0; transform:translateY(12%) scale(.86); filter:blur(5px); } }
+@keyframes pushPrevIn { from { opacity:0; transform:translateY(-18%) scale(1.15); filter:blur(7px); } to { opacity:1; transform:none; filter:none; } }
+
+/* Split page: left/right curtain movement. */
+.stage[data-transition="split"] .transition-next-out,
+.stage[data-transition="split"] .transition-prev-out { animation-name: splitOut; }
+.stage[data-transition="split"] .transition-next-in,
+.stage[data-transition="split"] .transition-prev-in { animation-name: splitIn; }
+@keyframes splitOut { from { opacity:1; transform:scale(1); } to { opacity:0; transform:scale(.95); filter:blur(3px); } }
+@keyframes splitIn { 0% { opacity:.2; clip-path:polygon(0 0, 47% 0, 47% 100%, 53% 100%, 53% 0, 100% 0, 100% 100%, 0 100%); transform:scale(1.08); } 100% { opacity:1; clip-path:polygon(0 0, 50% 0, 50% 100%, 50% 100%, 50% 0, 100% 0, 100% 100%, 0 100%); transform:scale(1); } }
+
+/* Finale: slower, celebratory reveal. */
+.stage[data-transition="finale"] .transition-next-out,
+.stage[data-transition="finale"] .transition-prev-out { animation-name: finaleOut; animation-duration:820ms; }
+.stage[data-transition="finale"] .transition-next-in,
+.stage[data-transition="finale"] .transition-prev-in { animation-name: finaleIn; animation-duration:820ms; }
+@keyframes finaleOut { from { opacity:1; transform:scale(1); } to { opacity:0; transform:scale(.86) rotateZ(-1deg); filter:blur(7px); } }
+@keyframes finaleIn { 0% { opacity:0; transform:scale(1.22) rotateZ(1.5deg); filter:blur(10px) brightness(1.4); } 62% { opacity:1; transform:scale(.985); filter:blur(0) brightness(1.06); } 100% { opacity:1; transform:scale(1); filter:none; } }
+
+.transition-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0;
+}
+.transition-fx.fx-flash { animation: fxFlash 520ms ease-out both; background:#fff; mix-blend-mode:screen; }
+.transition-fx.fx-spotlight { animation: fxGlow 680ms ease-out both; background:radial-gradient(circle at 50% 48%, rgba(255,255,255,.32), transparent 48%); }
+.transition-fx.fx-finale { animation: fxFinale 820ms ease-out both; background:radial-gradient(circle at 50% 46%, rgba(255,255,255,.18), transparent 42%); }
+@keyframes fxFlash { 0%,100%{opacity:0} 36%{opacity:.82} }
+@keyframes fxGlow { 0%,100%{opacity:0} 45%{opacity:.6} }
+@keyframes fxFinale { 0%,100%{opacity:0;transform:scale(.8)} 52%{opacity:.7;transform:scale(1.25)} }
 
 .tap-zone {
   position: absolute;
@@ -160,10 +326,7 @@ button, a { font: inherit; }
   z-index: 12;
   pointer-events: none;
 }
-.story-ui--top {
-  top: 0;
-  padding: calc(var(--safe-top) + 10px) 12px 0;
-}
+.story-ui--top { top: 0; padding: calc(var(--safe-top) + 10px) 12px 0; }
 .story-ui--bottom {
   bottom: 0;
   display: flex;
@@ -180,9 +343,10 @@ button, a { font: inherit; }
   gap: 3px;
 }
 .progress__item {
+  position: relative;
   height: 3px;
   border-radius: 99px;
-  background: rgba(255,255,255,.26);
+  background: rgba(255,255,255,.24);
   overflow: hidden;
 }
 .progress__item::after {
@@ -192,12 +356,12 @@ button, a { font: inherit; }
   height: 100%;
   transform-origin: left center;
   transform: scaleX(0);
-  background: rgba(255,255,255,.95);
+  background: rgba(255,255,255,.96);
   transition: transform 320ms ease;
 }
 .progress__item.is-done::after,
 .progress__item.is-current::after { transform: scaleX(1); }
-.progress__item.is-current::after { opacity: .78; }
+.progress__item.is-current::after { opacity: .82; }
 
 .counter {
   margin-top: 8px;
@@ -205,7 +369,7 @@ button, a { font: inherit; }
   line-height: 1;
   letter-spacing: .12em;
   color: rgba(255,255,255,.72);
-  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+  text-shadow: 0 2px 10px rgba(0,0,0,.48);
 }
 .counter__sep { margin: 0 5px; opacity: .5; }
 
@@ -213,10 +377,10 @@ button, a { font: inherit; }
 .source-link {
   pointer-events: auto;
   border: 1px solid rgba(255,255,255,.14);
-  background: rgba(10,10,12,.34);
+  background: rgba(10,10,12,.32);
   color: rgba(255,255,255,.82);
-  backdrop-filter: blur(12px) saturate(1.1);
-  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
   box-shadow: 0 8px 30px rgba(0,0,0,.18);
 }
 .hint {
@@ -243,7 +407,6 @@ button, a { font: inherit; }
   70% { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
   100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
 }
-
 .source-link {
   text-decoration: none;
   font-size: 11px;
@@ -255,18 +418,12 @@ button, a { font: inherit; }
   position: absolute;
   left: 0;
   right: 0;
-  height: 90px;
+  height: 88px;
   z-index: 9;
   pointer-events: none;
 }
-.edge-glow--top {
-  top: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,.34), transparent);
-}
-.edge-glow--bottom {
-  bottom: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,.38), transparent);
-}
+.edge-glow--top { top: 0; background: linear-gradient(180deg, rgba(0,0,0,.32), transparent); }
+.edge-glow--bottom { bottom: 0; background: linear-gradient(0deg, rgba(0,0,0,.36), transparent); }
 
 .story-fallback {
   position: absolute;
@@ -277,9 +434,11 @@ button, a { font: inherit; }
   text-align: center;
   background: linear-gradient(180deg, #16171b, #0a0a0c);
 }
-.story-fallback__box { max-width: 320px; }
-.story-fallback h2 { margin: 0 0 10px; font-size: 20px; }
+.story-fallback__box { max-width: 330px; }
+.story-fallback__eyebrow { display:block; margin-bottom:9px; font-size:11px; letter-spacing:.18em; color:rgba(255,255,255,.5); }
+.story-fallback h2 { margin: 0 0 10px; font-size: 24px; line-height:1.08; }
 .story-fallback p { margin: 0 0 16px; color: var(--muted); line-height: 1.5; font-size: 14px; }
+.story-fallback code { color:#fff; }
 .story-fallback a {
   display: inline-flex;
   padding: 10px 14px;
@@ -301,5 +460,10 @@ button, a { font: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   :root { --duration: 1ms; }
-  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
 }
