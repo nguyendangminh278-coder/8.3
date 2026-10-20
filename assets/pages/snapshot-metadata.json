@@ -2,11 +2,13 @@
   "source": "Canva page thumbnails via connected Canva design",
   "designId": "DAHYdLjF2Pw",
   "canvaVersion": 82,
-  "capturedAt": "2026-10-20T20:48:42.044Z",
+  "capturedAt": "2026-10-20T20:50:14.814Z",
+  "hiResMediaAvailable": false,
   "pages": [
     {
       "page": 1,
       "pageId": "PB1ZMt04MnhDVstj",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -25,6 +27,7 @@
     {
       "page": 2,
       "pageId": "PB8KNlpgcxJrvLYM",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -43,6 +46,7 @@
     {
       "page": 3,
       "pageId": "PByKJysHmqP8GKGm",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -61,6 +65,7 @@
     {
       "page": 4,
       "pageId": "PBdDPlTB6RwY8VSz",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -79,6 +84,7 @@
     {
       "page": 5,
       "pageId": "PBC4CBp8brmcwbqY",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -97,6 +103,7 @@
     {
       "page": 6,
       "pageId": "PBhCm5ZBRX9BJLxC",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -115,6 +122,7 @@
     {
       "page": 7,
       "pageId": "PBvPFDcVb3JwyrKt",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -133,6 +141,7 @@
     {
       "page": 8,
       "pageId": "PBZTJXrLCCgMkvYQ",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -151,6 +160,7 @@
     {
       "page": 9,
       "pageId": "PBT96kHGqgZF34lk",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -169,6 +179,7 @@
     {
       "page": 10,
       "pageId": "PBZfTPLwlSmzFSsH",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -187,6 +198,7 @@
     {
       "page": 11,
       "pageId": "PBxwWrMpMkDSs7NF",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -205,6 +217,7 @@
     {
       "page": 12,
       "pageId": "PB15Dl3bkrkwQnDT",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -223,6 +236,7 @@
     {
       "page": 13,
       "pageId": "PBnj6PFJhg7fjhQN",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
@@ -241,6 +255,7 @@
     {
       "page": 14,
       "pageId": "PBlDhgXnY2PmKSy5",
+      "sourceKind": "canva-export-fallback",
       "sourceWidth": 335,
       "sourceHeight": 596,
       "sourceFormat": "png",
