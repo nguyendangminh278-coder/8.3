@@ -1,51 +1,54 @@
 # University Wrapped 20/10 — Mobile Web
 
-Website mobile chuyển từ Canva `WRAPPED 20/10` sang trải nghiệm dạng story.
+Website mobile chuyển từ Canva `WRAPPED 20/10` sang trải nghiệm dạng story, ưu tiên giữ nguyên artwork gốc và làm lại phần chuyển cảnh để trông tự nhiên hơn trên điện thoại.
 
-## Hiện tại
+## Nguồn thiết kế
 
-- Nguồn thiết kế: Canva design `DAHYdLjF2Pw`.
-- Kích thước gốc: `900 × 1600` (9:16).
-- Website dùng 14 trang có nội dung; trang 15 của Canva hiện đang trống.
-- Vuốt lên/xuống, chạm trái/phải, dùng phím mũi tên/Space đều chuyển trang được.
-- Transition được làm lại theo kiểu card/story: slide + scale + blur nhẹ + easing mềm.
-- Có progress bar, safe-area cho iPhone, reduced-motion và desktop preview.
+- Canva design: `DAHYdLjF2Pw`
+- Kích thước gốc: `900 × 1600` (9:16)
+- Website dùng 14 trang có nội dung; trang 15 trên Canva hiện đang trống.
 
-## Cách website lấy hình
+## Trải nghiệm mobile
 
-Website có 2 lớp nguồn và tự ưu tiên theo thứ tự:
+- Vuốt lên/xuống để chuyển trang.
+- Chạm bên phải để đi tiếp, bên trái để quay lại.
+- Có drag feedback khi đang vuốt, vibration nhẹ trên thiết bị hỗ trợ, progress bar, safe-area cho iPhone và reduced-motion.
+- Mỗi nhóm nội dung dùng một kiểu transition riêng thay vì lặp lại một hiệu ứng: timeline, zoom, ranking shutter, diagonal wipe, paper turn, flash, spotlight, photo depth, camera push, split và finale.
 
-1. **Ảnh local trong repo** — ổn định nhất, pixel-perfect nhất.
-2. **Canva Embed** — dùng trực tiếp thiết kế Canva để khi Canva thay đổi thì website cũng cập nhật.
+## Cách website giữ nguyên Canva
 
-### 1) Ảnh local
+Website ưu tiên theo thứ tự:
 
-Export các page từ Canva ở kích thước gốc và đặt vào:
+1. `assets/pages/01.webp` → `14.webp`: snapshot 900×1600 từ Canva, nhanh và ổn định nhất.
+2. Nếu snapshot chưa có, fallback sang Canva Embed.
 
-```text
-assets/pages/01.png
-assets/pages/02.png
-...
-assets/pages/14.png
-```
+`app.js` cũng hỗ trợ `.png` và `.jpg`, nhưng workflow mặc định tạo WebP chất lượng cao.
 
-Có thể dùng `.webp`, `.png`, hoặc `.jpg`. Code sẽ tự dò file theo thứ tự WebP → PNG → JPG.
+## Tự động snapshot Canva
 
-> Đây là mode nên dùng khi phát hành chính thức vì nhanh, ổn định và giữ nguyên layout Canva.
-
-### 2) Canva Embed fallback
-
-Nếu chưa có ảnh local, website dùng:
+Repo có workflow:
 
 ```text
-https://www.canva.com/design/DAHYdLjF2Pw/view?embed&ui=<PAGE_ID>
+.github/workflows/snapshot-canva.yml
 ```
 
-Nếu iframe không hiện, mở Canva → **Share → See all → Embed → Embed** một lần để bật public embed.
+và script:
+
+```text
+scripts/snapshot-canva.mjs
+```
+
+Workflow dùng Chromium/Playwright mở Canva ở chế độ embed, chụp tuần tự 14 page đúng viewport `900×1600`, chuyển sang WebP chất lượng cao rồi commit vào `assets/pages/`.
+
+Có thể chạy lại thủ công trong GitHub:
+
+```text
+Actions → Snapshot Canva pages → Run workflow
+```
+
+Khi artwork trên Canva thay đổi, chạy workflow lại để đồng bộ ảnh website.
 
 ## Chạy local
-
-Có thể mở bằng bất kỳ static server nào, ví dụ:
 
 ```bash
 python -m http.server 8080
@@ -53,15 +56,14 @@ python -m http.server 8080
 
 Sau đó mở `http://localhost:8080`.
 
-Không nên mở trực tiếp `file://` vì trình duyệt có thể chặn một số request local/iframe.
-
 ## GitHub Pages
 
-Repo là static site thuần HTML/CSS/JS, nên có thể publish trực tiếp bằng GitHub Pages từ branch `main`.
+Đây là static site thuần HTML/CSS/JS, có thể publish trực tiếp bằng GitHub Pages từ branch `main`.
 
 ## File chính
 
 - `index.html` — khung story mobile.
-- `styles.css` — responsive + transition.
-- `app.js` — page config, swipe/tap/keyboard, Canva deep-link, local asset fallback.
-- `assets/pages/` — nơi để ảnh export từ Canva.
+- `styles.css` — responsive, swipe feedback và transition riêng từng section.
+- `app.js` — page config, local snapshot priority, Canva fallback, tap/swipe/keyboard.
+- `scripts/snapshot-canva.mjs` — tự lấy page Canva thành ảnh 900×1600.
+- `assets/pages/` — snapshot thực tế dùng trên website.
