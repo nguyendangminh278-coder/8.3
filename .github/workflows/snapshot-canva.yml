@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -41,4 +43,7 @@ jobs:
             exit 0
           fi
           git commit -m "Snapshot Canva pages for mobile site"
-          git push
+          # The website may be edited while screenshots are rendering. Rebase the
+          # generated snapshot commit onto the newest main before pushing.
+          git pull --rebase origin main
+          git push origin HEAD:main
