@@ -3,6 +3,7 @@ name: Validate mobile story
 on:
   push:
     paths:
+      - '.github/workflows/validate.yml'
       - 'index.html'
       - 'styles.css'
       - 'app.js'
