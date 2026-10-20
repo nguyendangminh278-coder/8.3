@@ -1,12 +1,14 @@
-# Page exports
+# Canva page assets
 
-Đặt ảnh export từ Canva tại đây theo tên `01` → `14`.
+Thư mục này đang chứa 14 page artwork được lấy từ Canva và lưu dưới dạng:
 
-Ví dụ:
+```text
+01.webp
+02.webp
+...
+14.webp
+```
 
-- `01.webp` / `01.png` / `01.jpg`
-- `02.webp` / `02.png` / `02.jpg`
-- ...
-- `14.webp` / `14.png` / `14.jpg`
+Nguồn Canva trả preview `335 × 596`; workflow chuyển sang WebP `900 × 1600` để website dùng ổn định theo đúng tỉ lệ 9:16. `snapshot-metadata.json` ghi kích thước nguồn, checksum và số liệu kiểm tra để tránh vô tình lưu trang lỗi giống nhau.
 
-Website sẽ tự ưu tiên WebP, sau đó PNG, rồi JPG. Tỉ lệ thiết kế gốc là 9:16, kích thước 900×1600.
+Website ưu tiên `.webp`, sau đó `.png`, rồi `.jpg`.
