@@ -5,7 +5,8 @@ on:
   push:
     paths:
       - '.github/workflows/snapshot-canva.yml'
-      - 'scripts/snapshot-canva.mjs'
+      - 'scripts/canva-page-sources.json'
+      - 'scripts/fetch-canva-pages.mjs'
 
 permissions:
   contents: write
@@ -13,7 +14,7 @@ permissions:
 jobs:
   snapshot:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,13 +26,11 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install snapshot dependencies
-        run: |
-          npm install --no-save playwright sharp
-          npx playwright install --with-deps chromium
+      - name: Install image dependency
+        run: npm install --no-save sharp
 
-      - name: Capture Canva pages
-        run: node scripts/snapshot-canva.mjs
+      - name: Fetch Canva page previews
+        run: node scripts/fetch-canva-pages.mjs
 
       - name: Commit page snapshots
         run: |
@@ -43,7 +42,5 @@ jobs:
             exit 0
           fi
           git commit -m "Snapshot Canva pages for mobile site"
-          # The website may be edited while screenshots are rendering. Rebase the
-          # generated snapshot commit onto the newest main before pushing.
           git pull --rebase origin main
           git push origin HEAD:main
