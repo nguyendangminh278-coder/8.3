@@ -1,0 +1,44 @@
+name: Snapshot Canva pages
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/snapshot-canva.yml'
+      - 'scripts/snapshot-canva.mjs'
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install snapshot dependencies
+        run: |
+          npm install --no-save playwright sharp
+          npx playwright install --with-deps chromium
+
+      - name: Capture Canva pages
+        run: node scripts/snapshot-canva.mjs
+
+      - name: Commit page snapshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/pages
+          if git diff --cached --quiet; then
+            echo "No snapshot changes."
+            exit 0
+          fi
+          git commit -m "Snapshot Canva pages for mobile site"
+          git push
