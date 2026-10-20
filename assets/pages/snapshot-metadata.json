@@ -1,0 +1,189 @@
+{
+  "source": "https://www.canva.com/design/DAHYdLjF2Pw/view?embed",
+  "capturedAt": "2026-10-20T20:43:50.087Z",
+  "pageTextSample": "We’ll have you designing again soon\n\nIf you can’t get past this page, visit the Help Centre to see why this is happening.\n\nRayID: a4dada870ae70dac",
+  "pages": [
+    {
+      "page": 1,
+      "bytes": 55468,
+      "sha256": "5b4697b18f4bddcd2fe35ab6be098ca13636a28ed5133439a383549f49ce87d4",
+      "entropy": 1.9152,
+      "sharpness": 2.3458,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": null
+    },
+    {
+      "page": 2,
+      "bytes": 55428,
+      "sha256": "6613b60bd4263e43111f879f3287ab1adc2baeb8017772be2a8a8aaee7877bd4",
+      "entropy": 1.9147,
+      "sharpness": 2.3453,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.035
+    },
+    {
+      "page": 3,
+      "bytes": 55318,
+      "sha256": "15641772b1c40c586ef945079236c4f414b6d4242c935261418ec2ac0e63da35",
+      "entropy": 1.9147,
+      "sharpness": 2.3451,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.016
+    },
+    {
+      "page": 4,
+      "bytes": 55392,
+      "sha256": "71b78749b1820e8c1da261cbf9e12d9922ffb53e620f45d7b8f4020d665aa5db",
+      "entropy": 1.9155,
+      "sharpness": 2.3454,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.019
+    },
+    {
+      "page": 5,
+      "bytes": 55372,
+      "sha256": "88473fd18203a08ebd16d8ad1ca6939638041334d6d176cf65397bba121abf14",
+      "entropy": 1.9144,
+      "sharpness": 2.3457,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.026
+    },
+    {
+      "page": 6,
+      "bytes": 55466,
+      "sha256": "b4eb40ecf84a18ade8e12f5dc53274a886f6463ee40e15045ca43d901eae131b",
+      "entropy": 1.9146,
+      "sharpness": 2.3459,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.025
+    },
+    {
+      "page": 7,
+      "bytes": 55400,
+      "sha256": "3f7be6b28b38b996fe495cba56af2a4608be6d7bda17e76164cc729bba6641fa",
+      "entropy": 1.9154,
+      "sharpness": 2.3454,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.039
+    },
+    {
+      "page": 8,
+      "bytes": 55414,
+      "sha256": "364064c1a731f9a06aeb656db1ce682fd10436eb0d2bec5b818bab08b3793864",
+      "entropy": 1.915,
+      "sharpness": 2.3453,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.015
+    },
+    {
+      "page": 9,
+      "bytes": 55394,
+      "sha256": "5f615686aa48237ab3e1237964bfc677cdaa5d0ac6eaad7453ac3a5d073c248d",
+      "entropy": 1.9144,
+      "sharpness": 2.3458,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.033
+    },
+    {
+      "page": 10,
+      "bytes": 55352,
+      "sha256": "52e8862a4df67a9b307b444cd2a29594228c0449b1f93cb8be16ac098b1fdd73",
+      "entropy": 1.9151,
+      "sharpness": 2.3456,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.027
+    },
+    {
+      "page": 11,
+      "bytes": 55308,
+      "sha256": "efe799daf21344e97903fcb4057ff8ed1ea997e65675457fa70b23e17378c464",
+      "entropy": 1.9155,
+      "sharpness": 2.3452,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.023
+    },
+    {
+      "page": 12,
+      "bytes": 55392,
+      "sha256": "f3315d2ed4b74b6fc96ac673d715147379940f99d7a65e3d3ae3dc7aebcee5ca",
+      "entropy": 1.9144,
+      "sharpness": 2.346,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.036
+    },
+    {
+      "page": 13,
+      "bytes": 55286,
+      "sha256": "bb9b30dd0edd9eee1db739882e0e2b24dcac5631e9f1a33f22503f686ef34b0b",
+      "entropy": 1.9153,
+      "sharpness": 2.3456,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.028
+    },
+    {
+      "page": 14,
+      "bytes": 55334,
+      "sha256": "d9b1d4fa58543d514846bc42f4da6be7ba44ae4434115bf3eefc12e948771366",
+      "entropy": 1.9153,
+      "sharpness": 2.3454,
+      "dominant": {
+        "r": 248,
+        "g": 248,
+        "b": 248
+      },
+      "meanAbsDiffFromPrevious": 0.024
+    }
+  ]
+}
