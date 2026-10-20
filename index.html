@@ -3,47 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <meta name="theme-color" content="#0b0b0d" />
+  <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="format-detection" content="telephone=no" />
   <title>University Wrapped 20/10</title>
-  <meta name="description" content="University Wrapped 20/10 — mobile story experience." />
+  <meta name="description" content="University Wrapped 20/10 — exact Canva playback with original animation and music." />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <main class="story-shell" id="app" aria-label="University Wrapped 20/10">
-    <div class="story-backdrop" aria-hidden="true"></div>
+  <main class="player" id="player" aria-label="University Wrapped 20/10">
+    <div class="canva-host" id="canvaHost"></div>
 
-    <header class="story-ui story-ui--top">
-      <div class="progress" id="progress" aria-label="Tiến trình"></div>
-      <div class="counter" aria-live="polite">
-        <span id="currentPage">01</span><span class="counter__sep">/</span><span id="totalPages">14</span>
+    <section class="start-screen" id="startScreen">
+      <div class="start-screen__inner">
+        <div class="start-screen__eyebrow">WRAPPED 20/10</div>
+        <button class="start-button" id="startButton" type="button">
+          <span class="start-button__icon" aria-hidden="true">▶</span>
+          <span>CHẠM ĐỂ BẮT ĐẦU</span>
+        </button>
+        <p class="start-screen__note">Bật âm lượng để nghe nhạc gốc</p>
       </div>
-    </header>
-
-    <section class="stage" id="stage" aria-live="polite">
-      <div class="story-card story-card--current" id="currentCard"></div>
-      <div class="story-card story-card--incoming" id="incomingCard"></div>
-
-      <button class="tap-zone tap-zone--prev" id="prevZone" aria-label="Trang trước"></button>
-      <button class="tap-zone tap-zone--next" id="nextZone" aria-label="Trang tiếp theo"></button>
     </section>
 
-    <footer class="story-ui story-ui--bottom">
-      <div class="hint" id="hint">
-        <span class="hint__dot"></span>
-        <span>Vuốt lên hoặc chạm để tiếp tục</span>
-      </div>
-      <a class="source-link" href="https://canva.link/ppl2m73eiigkpid" target="_blank" rel="noopener noreferrer">Canva gốc</a>
-    </footer>
+    <div class="loading" id="loading" hidden aria-live="polite">
+      <span class="loading__spinner" aria-hidden="true"></span>
+      <span>Đang tải bản Canva gốc…</span>
+    </div>
 
-    <div class="edge-glow edge-glow--top" aria-hidden="true"></div>
-    <div class="edge-glow edge-glow--bottom" aria-hidden="true"></div>
+    <a class="fallback-link" id="fallbackLink"
+       href="https://canva.link/018np8lvts0sdwp"
+       target="_blank" rel="noopener noreferrer" hidden>
+      Mở bản gốc trên Canva
+    </a>
   </main>
 
-  <noscript>Trang này cần JavaScript để chuyển giữa các trang.</noscript>
+  <noscript>Trang này cần JavaScript để phát thiết kế và âm thanh.</noscript>
   <script src="./app.js" defer></script>
-  <script src="./effects.js" defer></script>
 </body>
 </html>
