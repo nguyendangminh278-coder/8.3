@@ -14,6 +14,44 @@ if (!Array.isArray(source.pages) || source.pages.length !== 14) {
 
 await fs.mkdir(OUT, { recursive: true });
 
+async function fetchImage(url, label) {
+  const response = await fetch(url, {
+    redirect: 'follow',
+    signal: AbortSignal.timeout(15_000),
+    headers: {
+      'user-agent': 'Mozilla/5.0 AppleWebKit/537.36 Chrome/131 Safari/537.36',
+      'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+    },
+  });
+
+  if (!response.ok) throw new Error(`${label}: HTTP ${response.status} ${response.statusText}`);
+  const contentType = response.headers.get('content-type') || '';
+  if (!contentType.startsWith('image/')) {
+    const preview = (await response.text()).slice(0, 240).replace(/\s+/g, ' ');
+    throw new Error(`${label}: expected image, got ${contentType}: ${preview}`);
+  }
+  return Buffer.from(await response.arrayBuffer());
+}
+
+async function fetchCanvaPreview(entry, number) {
+  const primary = entry.url;
+  const fallback = new URL(primary).searchParams.get('fallback');
+  const candidates = [fallback, primary].filter(Boolean);
+  const errors = [];
+
+  for (const [index, url] of candidates.entries()) {
+    try {
+      console.log(`  trying ${index === 0 && fallback ? 'Canva export fallback' : 'Canva media'}...`);
+      return await fetchImage(url, `Page ${number}`);
+    } catch (error) {
+      errors.push(error?.message || String(error));
+      console.warn(`  source failed: ${errors.at(-1)}`);
+    }
+  }
+
+  throw new Error(`Page ${number}: all preview sources failed: ${errors.join(' | ')}`);
+}
+
 const checksums = [];
 const metadata = [];
 let previousProbe = null;
@@ -21,26 +59,7 @@ let previousProbe = null;
 for (const entry of source.pages) {
   const number = String(entry.page).padStart(2, '0');
   console.log(`fetching Canva page ${number}...`);
-
-  const response = await fetch(entry.url, {
-    redirect: 'follow',
-    headers: {
-      'user-agent': 'Mozilla/5.0 AppleWebKit/537.36 Chrome/131 Safari/537.36',
-      'accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Page ${number}: HTTP ${response.status} ${response.statusText}`);
-  }
-
-  const contentType = response.headers.get('content-type') || '';
-  if (!contentType.startsWith('image/')) {
-    const preview = (await response.text()).slice(0, 240).replace(/\s+/g, ' ');
-    throw new Error(`Page ${number}: expected image, got ${contentType}: ${preview}`);
-  }
-
-  const input = Buffer.from(await response.arrayBuffer());
+  const input = await fetchCanvaPreview(entry, number);
   const inputMeta = await sharp(input).metadata();
 
   if ((inputMeta.width ?? 0) < 300 || (inputMeta.height ?? 0) < 500) {
@@ -49,7 +68,7 @@ for (const entry of source.pages) {
 
   const webp = await sharp(input)
     .resize(900, 1600, { fit: 'fill', kernel: sharp.kernel.lanczos3 })
-    .webp({ quality: 95, effort: 6, smartSubsample: true })
+    .webp({ quality: 95, effort: 5, smartSubsample: true })
     .toBuffer();
 
   const outputStats = await sharp(webp).stats();
@@ -93,7 +112,6 @@ for (const entry of source.pages) {
   );
 }
 
-// Catch the most common failure mode: receiving the same generic page for every slide.
 const meaningfulDiffs = metadata
   .slice(1)
   .map((p) => p.meanAbsDiffFromPrevious)
