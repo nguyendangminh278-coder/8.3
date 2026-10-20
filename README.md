@@ -1,6 +1,6 @@
 # University Wrapped 20/10 — Mobile Web
 
-Website mobile chuyển từ Canva `WRAPPED 20/10` sang trải nghiệm dạng story, ưu tiên giữ nguyên artwork gốc và làm lại phần chuyển cảnh để trông tự nhiên hơn trên điện thoại.
+Website mobile chuyển từ Canva `WRAPPED 20/10` sang trải nghiệm dạng story, giữ nguyên artwork gốc và làm lại chuyển cảnh để trông tự nhiên hơn trên điện thoại.
 
 ## Nguồn thiết kế
 
@@ -12,19 +12,20 @@ Website mobile chuyển từ Canva `WRAPPED 20/10` sang trải nghiệm dạng s
 
 - Vuốt lên/xuống để chuyển trang.
 - Chạm bên phải để đi tiếp, bên trái để quay lại.
-- Có drag feedback khi đang vuốt, vibration nhẹ trên thiết bị hỗ trợ, progress bar, safe-area cho iPhone và reduced-motion.
-- Mỗi nhóm nội dung dùng một kiểu transition riêng thay vì lặp lại một hiệu ứng: timeline, zoom, ranking shutter, diagonal wipe, paper turn, flash, spotlight, photo depth, camera push, split và finale.
+- Có drag feedback, vibration nhẹ trên thiết bị hỗ trợ, progress bar, safe-area cho iPhone và reduced-motion.
+- Mỗi nhóm nội dung có transition riêng: timeline, zoom, ranking shutter, diagonal wipe, paper turn, flash, spotlight, photo depth, camera push, split và finale.
+- Một số section còn được cắt thành các lát của chính artwork Canva trong lúc chuyển cảnh để tạo cảm giác từng layer đang chuyển động mà không làm sai bố cục gốc.
 
 ## Cách website giữ nguyên Canva
 
 Website ưu tiên theo thứ tự:
 
-1. `assets/pages/01.webp` → `14.webp`: snapshot 900×1600 từ Canva, nhanh và ổn định nhất.
-2. Nếu snapshot chưa có, fallback sang Canva Embed.
+1. `assets/pages/01.webp` → `14.webp`: ảnh của từng page lấy trực tiếp từ Canva và lưu bền vững trong repo.
+2. Nếu ảnh local không tồn tại, fallback sang Canva Embed.
 
-`app.js` cũng hỗ trợ `.png` và `.jpg`, nhưng workflow mặc định tạo WebP chất lượng cao.
+Canva hiện trả page preview ở `335 × 596`; workflow upscale bằng Lanczos lên `900 × 1600` và lưu WebP chất lượng cao. Đây là cách giữ nguyên toàn bộ bố cục, typography, sticker và ảnh của Canva mà không phụ thuộc vào link ảnh có thời hạn.
 
-## Tự động snapshot Canva
+## Đồng bộ page từ Canva
 
 Repo có workflow:
 
@@ -32,21 +33,20 @@ Repo có workflow:
 .github/workflows/snapshot-canva.yml
 ```
 
-và script:
+Các file nguồn:
 
 ```text
-scripts/snapshot-canva.mjs
+scripts/canva-page-sources.json
+scripts/fetch-canva-pages.mjs
 ```
 
-Workflow dùng Chromium/Playwright mở Canva ở chế độ embed, chụp tuần tự 14 page đúng viewport `900×1600`, chuyển sang WebP chất lượng cao rồi commit vào `assets/pages/`.
+Workflow tải trực tiếp page preview đã ký của Canva, kiểm tra kích thước và độ khác biệt giữa các trang, upscale sang WebP `900 × 1600`, rồi commit vào `assets/pages/`.
 
-Có thể chạy lại thủ công trong GitHub:
+Khi Canva thay đổi, cập nhật lại `scripts/canva-page-sources.json` bằng page preview mới rồi chạy:
 
 ```text
 Actions → Snapshot Canva pages → Run workflow
 ```
-
-Khi artwork trên Canva thay đổi, chạy workflow lại để đồng bộ ảnh website.
 
 ## Chạy local
 
@@ -58,12 +58,13 @@ Sau đó mở `http://localhost:8080`.
 
 ## GitHub Pages
 
-Đây là static site thuần HTML/CSS/JS, có thể publish trực tiếp bằng GitHub Pages từ branch `main`.
+Repo đã có `.github/workflows/pages.yml`. Cần bật GitHub Pages một lần trong `Settings → Pages`, sau đó có thể chạy workflow deploy thủ công.
 
 ## File chính
 
 - `index.html` — khung story mobile.
 - `styles.css` — responsive, swipe feedback và transition riêng từng section.
 - `app.js` — page config, local snapshot priority, Canva fallback, tap/swipe/keyboard.
-- `scripts/snapshot-canva.mjs` — tự lấy page Canva thành ảnh 900×1600.
-- `assets/pages/` — snapshot thực tế dùng trên website.
+- `effects.js` — hiệu ứng cắt artwork thành các lát/layer trong lúc transition.
+- `scripts/fetch-canva-pages.mjs` — lấy page Canva và tạo WebP local.
+- `assets/pages/` — 14 artwork page thực tế dùng trên website.
