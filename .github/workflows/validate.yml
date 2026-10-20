@@ -1,0 +1,35 @@
+name: Validate mobile story
+
+on:
+  push:
+    paths:
+      - 'index.html'
+      - 'styles.css'
+      - 'app.js'
+      - 'effects.js'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check effects.js
+
+      - name: Smoke test static server
+        run: |
+          python3 -m http.server 8080 >/tmp/wrapped-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID' EXIT
+          sleep 1
+          curl --fail --silent http://127.0.0.1:8080/ | grep -q 'University Wrapped 20/10'
+          curl --fail --silent --head http://127.0.0.1:8080/assets/pages/01.webp >/dev/null
+          curl --fail --silent --head http://127.0.0.1:8080/effects.js >/dev/null
